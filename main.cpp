@@ -1,58 +1,42 @@
 #include <iostream>
 
 using namespace std;
-int fib(int n);
-int fib_recursion(int n);
+int factorial(int n);
+int factorial_recursion(int n);
 int main()
 {
-    int number;
-    cout<<"Enter the Number to find fibonacci :"<<endl;
-    cin>>number;
+    int num,res,res2;
+	cout<<" Enter Number To Find Its Factorial:  ";
+	cin>>num;
+	res=factorial(num);
+	cout<<"Factorial of "<<num<<" is "<< res<<endl;
 
-    cout<<"Fibonacci series using loops :"<<endl;
-    cout<<fib(number);
-
-    /*cout<<endl;
-
-    cout<<"Fibonacci series using recursion :"<<endl;
-    for(int i=0;i<number;i++)
-    {
-        cout<<fib_recursion(i)<<" "; //calling recursive function
-    }
-    */
-
-
-
+	res2=factorial_recursion(num);
+	cout<<"factorial of "<<num<< " using recursion is "<<res2<<endl;
     return 0;
 }
-//function using recursion to find fibonacci series
+
+//function using loops to find factorial
 //takes one parameter
 //return type is integer
-
-int fib(int n)
+int factorial(int n)
 {
-    int first=0,second=1;
-    int nextterm=0;
-    cout<<"0"<< " 1"<<" ";
-    for(int i=2;i<=n-2;++i)
-    {
-        nextterm=first+second;
-        cout<<nextterm<<" ";
-        first=second;
-        second=nextterm;
-    }
-}
 
-//function using loops to find fibonacci series
+    int fact=1;
+    for(int i=1;i<=n;i++)
+    {
+        fact*=i;
+    }
+    return fact;
+
+}
+//function using recursion to find factorial
 //takes one parameter
 //return type is integer
-int fib_recursion(int n)
+int factorial_recursion(int n)
 {
     if(n==0)
-        return 0;
-    else if(n==1)
         return 1;
     else
-        return (fib_recursion(n-1)+fib_recursion(n-2));
-
+        return n*(factorial_recursion(n-1));
 }
