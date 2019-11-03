@@ -1,57 +1,58 @@
 #include <iostream>
 
 using namespace std;
-
+int fib(int n);
+int fib_recursion(int n);
 int main()
 {
+    int number;
+    cout<<"Enter the Number to find fibonacci :"<<endl;
+    cin>>number;
 
-    int row;
+    cout<<"Fibonacci series using loops :"<<endl;
+    cout<<fib(number);
 
-    cout<<"size of row::"<<endl;
-    cin>>row;
+    /*cout<<endl;
 
-    int **Array = new int*[row];
-
-    int numOfCol;
-    int *colSize=new int[20];
-
-    for(int i=0;i<row;i++){
-        cout<<"Enter Number of Column in row :"<<i<<endl;
-        cin>>numOfCol;
-        Array[i] = new int[numOfCol];
-        colSize[i]=numOfCol;
-
-        for(int j=0;j<numOfCol;j++){
-            cout<<"Enter elements for row No::"<<i<<endl;
-            cin>>Array[i][j];
-
-
-        }
+    cout<<"Fibonacci series using recursion :"<<endl;
+    for(int i=0;i<number;i++)
+    {
+        cout<<fib_recursion(i)<<" "; //calling recursive function
     }
+    */
 
 
-    for(int i=0;i<row;i++){
-        for(int j=0;j<colSize[i];j++){
-
-           cout<<Array[i][j]<<" "; 
-        }
-        cout<<endl;
-
-    }
-
-
-    for(int i=0;i<row;i++){
-        delete[] Array[i];  // delete every array elements 
-    }
-    delete[] Array;        //delete array
-
-    delete [] colSize;     // delete colSize
-
-
-
-   Array=NULL;
-   colSize=NULL;
 
     return 0;
 }
+//function using recursion to find fibonacci series
+//takes one parameter
+//return type is integer
 
+int fib(int n)
+{
+    int first=0,second=1;
+    int nextterm=0;
+    cout<<"0"<< " 1"<<" ";
+    for(int i=2;i<=n-2;++i)
+    {
+        nextterm=first+second;
+        cout<<nextterm<<" ";
+        first=second;
+        second=nextterm;
+    }
+}
+
+//function using loops to find fibonacci series
+//takes one parameter
+//return type is integer
+int fib_recursion(int n)
+{
+    if(n==0)
+        return 0;
+    else if(n==1)
+        return 1;
+    else
+        return (fib_recursion(n-1)+fib_recursion(n-2));
+
+}
