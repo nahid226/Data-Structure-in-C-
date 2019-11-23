@@ -1,42 +1,47 @@
 #include <iostream>
+#include "StackType.h"
+#include "ItemType.h"
 
 using namespace std;
-int factorial(int n);
-int factorial_recursion(int n);
+
 int main()
 {
-    int num,res,res2;
-	cout<<" Enter Number To Find Its Factorial:  ";
-	cin>>num;
-	res=factorial(num);
-	cout<<"Factorial of "<<num<<" is "<< res<<endl;
+    StackType s1;
+    ItemType i1,i2,i3,i4,i5;
+    i1.initialize(10);
+    i2.initialize(30);
+    i3.initialize(12);
+    i4.initialize(90);
+    i5.initialize(23);
 
-	res2=factorial_recursion(num);
-	cout<<"factorial of "<<num<< " using recursion is "<<res2<<endl;
-    return 0;
-}
+    s1.push(i2);
+    s1.push(i1);
+    s1.push(i5);
 
-//function using loops to find factorial
-//takes one parameter
-//return type is integer
-int factorial(int n)
-{
-
-    int fact=1;
-    for(int i=1;i<=n;i++)
-    {
-        fact*=i;
-    }
-    return fact;
-
-}
-//function using recursion to find factorial
-//takes one parameter
-//return type is integer
-int factorial_recursion(int n)
-{
-    if(n==0)
-        return 1;
+    s1.printStack();
+    if(s1.IsFull())
+        cout<<"stack is full"<<endl;
     else
-        return n*(factorial_recursion(n-1));
+        cout<<"stack is not full"<<endl;
+    s1.push(i3);
+    s1.push(i4);
+    s1.printStack();
+    if(s1.IsFull())
+        cout<<"stack is full"<<endl;
+    else
+        cout<<"stack is not full"<<endl;
+
+    s1.pop();
+    s1.printStack();
+    if(s1.IsFull())
+        cout<<"stack is full"<<endl;
+    else
+        cout<<"stack is not full"<<endl;
+    ItemType i6;
+    i6 = s1.Top();
+    cout<<"top :";
+    i6.printItem();
+
+
+    return 0;
 }
