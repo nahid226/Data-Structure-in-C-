@@ -2,8 +2,10 @@
 #include<iostream>
 using namespace std;
 
-StackType::StackType()
+StackType::StackType(int size)
 {
+    maxStack = size;
+    items = new ItemType[maxStack];
     top = -1;
 }
 bool StackType::IsEmpty() const
@@ -13,7 +15,7 @@ bool StackType::IsEmpty() const
 }
 bool StackType::IsFull() const
 {
-    return (top==MAX_ITEMS - 1);
+    return (top== maxStack - 1);
 
 }
 
@@ -43,4 +45,9 @@ void StackType::printStack()
         items[i].printItem();
     }
     cout<<endl;
+}
+
+StackType::~StackType()
+{
+    delete [] items;
 }

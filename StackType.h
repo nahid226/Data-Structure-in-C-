@@ -12,20 +12,22 @@ class EmptyStack
 class StackType
 {
     public:
-        StackType();
+        StackType(int size);
         bool IsFull()const;
         bool IsEmpty()const;
         void push(ItemType newItem);
         void pop();
         ItemType Top();
         void printStack();
+        ~StackType();
 
 
     protected:
 
     private:
         int top;
-        ItemType items[MAX_ITEMS];
+        int maxStack;
+        ItemType* items;
 
 };
 
