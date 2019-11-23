@@ -2,20 +2,28 @@
 #include<iostream>
 using namespace std;
 
-StackType::StackType(int size)
+StackType::StackType()
 {
-    maxStack = size;
-    items = new ItemType[maxStack];
-    top = -1;
+    topptr = NULL;
 }
 bool StackType::IsEmpty() const
 {
-    return (top==-1);
+    return (topptr==NULL);
 
 }
 bool StackType::IsFull() const
 {
-    return (top== maxStack - 1);
+    NodeType* location;
+    try
+    {
+        location = new NodeType;
+        delete location;
+        return false;
+    }
+    catch(bad_alloc& exception)
+    {
+        return true;
+    }
 
 }
 
@@ -23,31 +31,52 @@ void StackType::push(ItemType newItem)
 {
     if(IsFull())
         throw FullStack();
-    top = top + 1;
-    items[top] = newItem;
+    else
+    {
+        NodeType* location = new NodeType;
+        location->info = newItem;
+        location->next = topptr;
+        topptr = location;
+    }
 }
 void StackType::pop()
 {
     if(IsEmpty())
         throw EmptyStack();
-    top = top - 1;
+
+    else
+    {
+        NodeType* tempptr;
+        tempptr = topptr;
+        topptr = topptr ->next;
+        delete tempptr;
+    }
 }
 ItemType StackType::Top()
 {
     if(IsEmpty())
         throw EmptyStack();
-    return items[top];
+    return topptr->info;
 }
 void StackType::printStack()
 {
-    for(int i=0;i<=top;i++)
+    NodeType* head;
+    head=topptr;
+    while(head!=NULL)
     {
-        items[i].printItem();
+        head->info.printItem();
+        head=head->next;
     }
     cout<<endl;
 }
 
 StackType::~StackType()
 {
-    delete [] items;
+    NodeType* tempptr;
+    while(tempptr != NULL)
+    {
+        tempptr = topptr;
+        topptr = topptr ->next;
+        delete tempptr;
+    }
 }

@@ -1,6 +1,7 @@
 #ifndef STACKTYPE_H
 #define STACKTYPE_H
 #include "ItemType.h"
+
 class FullStack
 {
 
@@ -11,8 +12,13 @@ class EmptyStack
 };
 class StackType
 {
+    struct NodeType
+    {
+        ItemType info;
+        NodeType* next;
+    };
     public:
-        StackType(int size);
+        StackType();
         bool IsFull()const;
         bool IsEmpty()const;
         void push(ItemType newItem);
@@ -25,9 +31,7 @@ class StackType
     protected:
 
     private:
-        int top;
-        int maxStack;
-        ItemType* items;
+        NodeType* topptr;
 
 };
 
